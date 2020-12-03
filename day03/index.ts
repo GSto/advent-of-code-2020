@@ -4,17 +4,6 @@ const contents = fs.readFileSync(__dirname+'/map.txt', 'utf8')
 
 const answerGrid: string[][] = contents.split('\n').map(row => row.split(''))
 
-const mock = "..#.\n####\n...."
-
-const testGrid: string[][] = mock.split('\n').map(row => row.split(''))
-
-/*
-Right 1, down 1.
-Right 3, down 1. (This is the slope you already checked.)
-Right 5, down 1.
-Right 7, down 1.
-Right 1, down 2.
-*/
 const partTwoMoves = [
   [1, 1],
   [3, 1],
