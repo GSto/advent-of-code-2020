@@ -1,3 +1,4 @@
+import { Range } from './types'
 export function xor(a:boolean, b:boolean): boolean {
   return (a || b) && !(a && b)
 }
@@ -16,4 +17,12 @@ export function binarySearch(haystack: any[], needle:any) : boolean {
     }
   }
   return false
+}
+
+export function inRange(num: number, range: Range): boolean {
+  return (num - range.start) * (num - range.end) <= 0
+}
+
+export function matchesRegex(str:string, exp:RegExp): boolean {
+  return str.match(exp) !== null
 }

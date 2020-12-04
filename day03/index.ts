@@ -4,14 +4,13 @@ const contents = fs.readFileSync(__dirname+'/map.txt', 'utf8')
 
 const answerGrid: string[][] = contents.split('\n').map(row => row.split(''))
 
-const partTwoMoves = [
+const partTwoMoves: [number, number][] = [
   [1, 1],
   [3, 1],
   [5, 1],
   [7, 1],
   [1, 2]
 ]
-
 
 function countTreeCollisions(grid: string[][], rightMove: number, downMove: number): number {
   let row = downMove
@@ -30,10 +29,8 @@ function countTreeCollisions(grid: string[][], rightMove: number, downMove: numb
   return treesHit
 }
 
-function solvePartTwo(grid: string[][], moveset: number[][]): number {
-  return moveset.reduce((acc: number, move: number[]): number => {
-    return acc * countTreeCollisions(grid, move[0], move[1])
-  }, 1)
+function solvePartTwo(grid: string[][], moveset: [number, number][]): number {
+  return moveset.reduce((acc: number, [right, down]: [number, number]): number => acc * countTreeCollisions(grid, right, down), 1)
 }
 
 console.log('firstAnswer', countTreeCollisions(answerGrid, 3, 1)) //expect 280
