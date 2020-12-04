@@ -1,14 +1,16 @@
 import fs from 'fs'
 import { inRange, matchesRegex } from '../lib'
+import { Range } from '../lib/types'
+
 type Rule = [string, (f:string) => boolean]
-interface Passport {
-  [key: string] : string
-}
 
 interface Rules {
   [key:string]: (f:string) => boolean,
 }
 
+interface Passport {
+  [key: string] : string
+}
 
 const contents = fs.readFileSync(__dirname+'/passports.txt', 'utf8')
 
@@ -43,10 +45,8 @@ const strictRules = {
     const validFormat = matchesRegex(field, /[0-9]+(in|cm)$/)
     if(!validFormat) return false
     const num = parseInt(field)
-    if(matchesRegex(field, /in$/)) {
-      return inRange(num, { start: 59, end: 76 })
-    }
-    return inRange(num, { start: 150, end: 193 })
+    const range: Range = matchesRegex(field, /in$/) ? { start: 59, end: 76 } : { start: 150, end: 193}
+    return inRange(num, range)
   },
   hcl: (field:string) => matchesRegex(field, /^#[0-9a-f]{6}$/i),
   ecl: (field:string) => ['amb','blu','brn','gry', 'grn', 'hzl','oth'].includes(field),
