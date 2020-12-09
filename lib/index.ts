@@ -26,3 +26,16 @@ export function inRange(num: number, range: Range): boolean {
 export function matchesRegex(str:string, exp:RegExp): boolean {
   return str.match(exp) !== null
 }
+
+export function replaceAt(arr: Array<any>, replaceAt: number, replacement: any): Array<any> {
+  return [
+    ...arr.slice(0, replaceAt),
+    replacement,
+    ...arr.slice(replaceAt + 1),
+  ]
+}
+
+export function uniqifyArray(arr: Array<any>): Array<any> {
+  return Array.from(new Set(arr))
+}
+
